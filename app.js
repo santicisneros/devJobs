@@ -8,16 +8,13 @@ const cookieParser =require('cookie-parser');
 const session = require('express-session')
 const app =express();
 const MongoStore = require('connect-mongo');
-/*const MongoStore =require('connect-mongodb-session')(session);/*SE LE PASA VARIABLES EN SESSION AL PAQUETE CONNECT*/
-/*const store = new MongoStore({
-    uri: process.env.DATABASE,
-    collection:'devJobs'
-}); */
+
 require('dotenv').config({path:'variables.env'})
 
 app.engine('handlebars',
      exphbs.engine({
-    defaultLayout:'layout'
+    defaultLayout:'layout',
+    helpers:require('./helpers/handlebars')
 }));
 app.set('view engine', 'handlebars');
 app.use(express.static(path.join(__dirname, 'public')));
