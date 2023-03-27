@@ -12,6 +12,9 @@ module.exports =()=>{
     router.post('/vacantes/nueva',vacantesControllers.agregarVacante)
 
     //mostrar vacante 
-    router.get('/vacantes/:url',vacantesControllers.mostrarVacante)
+    router.get('/vacantes/:url',vacantesControllers.mostrarVacante);
+//editar vacante
+    router.get('/vacantes/editar/:url',vacantesControllers.formEditarVacante)
     return router
 }
+
