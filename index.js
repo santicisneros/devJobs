@@ -10,14 +10,19 @@ const cookieParser =require('cookie-parser');
 const session = require('express-session')
 const MongoStore = require('connect-mongo');
 const bodyParser =require('body-parser');
-require('dotenv').config({path:'variables.env'})
+require('dotenv').config({path:'variables.env'});
+// const expressValidator = require('express-validator')
+const flash = require('connect-flash')
 const app =express();
 
 //habilitar body-parser
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:true}));
+//validacion de campos 
 
+// app.use(express-Validator());
 
+//habilitar handlebars
 app.engine('handlebars',
      exphbs.engine({
       handlebars: allowInsecurePrototypeAccess(handlebars),
@@ -43,7 +48,15 @@ app.use(session({
   }));
   
 
+//alertas
+app.use(flash());
 
+//creando nuestro middleware
+// app.use((req,res,next)=>{
+//   req.locals.mensajes=req.flash() //se llena variable local con mensajes
+// next();
+
+// });
 
 app.use('/',router())
 

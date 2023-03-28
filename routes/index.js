@@ -21,6 +21,10 @@ module.exports =()=>{
     //crear cuentas
 
     router.get('/crear-cuenta', usuariosControllers.formCrearCuenta)
+    router.post('/crear-cuenta',
+    
+     usuariosControllers.validarRegistro,
+     usuariosControllers.crearUsuario)
     return router
 }
 
