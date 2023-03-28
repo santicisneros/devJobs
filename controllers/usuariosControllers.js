@@ -1,6 +1,6 @@
 const Usuarios = require('../models/Usuarios');
 const mongoose = require('mongoose');
-const { validationResult, body} = require('express-validator')
+const { sanitizeBody, validationResult, body} = require('express-validator')
 
 exports.formCrearCuenta = (req,res)=>{
     res.render('crear-cuenta',{
@@ -10,9 +10,16 @@ exports.formCrearCuenta = (req,res)=>{
 };
 
 exports.validarRegistro =[
-    body('nombre').notEmpty().withMessage('El combre es obligatorio'),
+    
+    body('nombre').notEmpty().withMessage('El nombre es obligatorio').escape(),
+    body('email').isEmail().withMessage('El email es obligatorio').escape(),
+    body('password').bail().notEmpty().isLength({ min: 8, max:12 }).matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/).withMessage('La contraseña debe contener al menos una letra minúscula, una letra mayúscula, un número y un carácter especial').withMessage('El email es obligatorio').escape(),
+    body('confirmar').bail().equals(({ req }) => req.body.password).withMessage('El password es diferente').escape(),
+    
+
     (req,res,next)=>{
-        const errors = validationResult(req);;// se guardan errores
+        console.log(req.body);
+        const errors = validationResult(req);// se guardan errores
         if (!errors.isEmpty()) {
             return res.status(400).json({ errors: errors.array() });
           }
