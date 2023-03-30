@@ -12,7 +12,6 @@ const MongoStore = require('connect-mongo');
 const bodyParser =require('body-parser');
 require('dotenv').config({path:'variables.env'});
 // const expressValidator = require('express-validator')
-const flash = require('connect-flash')
 const app =express();
 
 //habilitar body-parser
@@ -48,12 +47,10 @@ app.use(session({
   }));
   
 
-//alertas
-app.use(flash());
 
 //creando nuestro middleware
 // app.use((req,res,next)=>{
-//   req.locals.mensajes=req.flash() //se llena variable local con mensajes
+//   req.locals.msg=req.flash() //se llena variable local con mensajes
 // next();
 
 // });

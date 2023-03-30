@@ -17,5 +17,20 @@ module.exports={
         return opciones.fn(this).replace(
             new RegExp(` value="${seleccionado}"`), '$& selected="selected"'
         )
+ 
     },
+    // mostrarAlertas: (errors = {}, alertas) => {
+    //     const categorias = Object.keys(errors);
+    //     let html = '';
+    //     if (categorias.length) {
+    //       categorias.forEach(categoria => {
+    //         errors[categoria].forEach(error => {
+    //           html += `<div class="${categoria} alerta">${error}</div>`;
+    //         });
+    //       });
+    //     }
+    //     alertas.fn().html = html;
+    //     return new Handlebars.SafeString(html);
+    //   }
+    // }
 }
